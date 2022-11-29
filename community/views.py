@@ -15,16 +15,16 @@ def write(request):
             form.save()
     else:
         form = Form()
-    return render(request, 'write.html', {'form' : form})
+    return render(request, 'community/write.html', {'form' : form})
 
 def articleList(request):
     article_list = Article.objects.all() # 모두 가져오기
-    return render(request, 'list.html', {'article_list' : article_list})
+    return render(request, 'community/list.html', {'article_list' : article_list})
 
 def viewDetail(request, num=1):
     # 클릭한 레코드를 DB 읽어오기
     article_detail = Article.objects.get(id=num) # 하나 가져오기
-    return render(request, 'view_detail.html', {'article_detail':article_detail})
+    return render(request, 'community/view_detail.html', {'article_detail':article_detail})
 
 def index(request):
     latest_article_list = Article.objects.all().order_by('-cdate')[:3] # 내림차순으로 3개 정렬하기 

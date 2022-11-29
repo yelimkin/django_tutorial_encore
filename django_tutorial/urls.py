@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from community.views import write
 from community.views import articleList
 from community.views import viewDetail
@@ -22,8 +22,9 @@ from community.views import index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('write/', write, name='write'), # route path, view의 함수, data
-    path('list/', articleList, name="list"),
-    path('view_detail/<int:num>', viewDetail, name="view_detail"),
-    path('index/', index, name="index"),
+    # path('write/', write, name='write'), # route path, view의 함수, data
+    # path('list/', articleList, name="list"),
+    # path('view_detail/<int:num>', viewDetail, name="view_detail"),
+    path('', index, name="index"),
+    path('community/', include('community.urls')),
 ]
