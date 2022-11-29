@@ -25,3 +25,7 @@ def viewDetail(request, num=1):
     # 클릭한 레코드를 DB 읽어오기
     article_detail = Article.objects.get(id=num) # 하나 가져오기
     return render(request, 'view_detail.html', {'article_detail':article_detail})
+
+def index(request):
+    latest_article_list = Article.objects.all().order_by('-cdate')[:3] # 내림차순으로 3개 정렬하기 
+    return render(request, 'index.html', {'latest_article_list' : latest_article_list})
