@@ -17,9 +17,11 @@ from django.contrib import admin
 from django.urls import path
 from community.views import write
 from community.views import articleList
+from community.views import viewDetail
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('write/', write, name='write'), # route path, view의 함수, data
     path('list/', articleList, name="list"),
+    path('view_detail/<int:num>', viewDetail, name="view_detail"),
 ]
