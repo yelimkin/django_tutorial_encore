@@ -7,46 +7,72 @@
     <title>Document</title>
 </head>
 <body>
-    <div>
-        <canvas id="myChart"></canvas>
+    {% extends 'partials/base.html' %}
+    {% load crispy_forms_tags %}
+    {% block content %}
+
+    <div class="row mt-3 pt-3">
+        <div class="col-4">
+            <div class="border p-3 shadow">
+                <h4>Add Data</h4>
+                <hr>
+                <form action="" method="POST">
+                    {{form | crispy}} {% csrf_token %}
+                <input type="submit" class="btn btn-success btn-block" value="입력">
+                </form>
+            </div>
+            
+        </div>
+        <div class="col">
+            <canvas id="myChart"></canvas>
+        </div>
     </div>
-      
+    {% endblock content %}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-      
+
+    {% block script %}
     <script>
         const ctx = document.getElementById('myChart');
-        
-        const data = {
-            datasets: [{
-                label: 'First Dataset',
-                data: [
-                    {
-                    x: 28,
-                    y: 22,
-                    r: 15
-                    }, 
-                    {
-                    x: 36,
-                    y: 20,
-                    r: 10
-                    },
-                    {
-                    x: 31,
-                    y: 20.6,
-                    r: 40
-                    }
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [
+                    {% for cntry in country_datas %}
+                        '{{cntry.country}}',
+                    {% endfor %}
                 ],
-                backgroundColor: 'rgb(255, 99, 132)'
-            }]
-        };
+                datasets: [{
+                    label: 'population',
+                    data: [
+                        {% for cntry in country_datas %}
+                            '{{cntry.population}}',
+                        {% endfor %}
+                    ],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 205, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(201, 203, 207, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(255, 159, 64)',
+                        'rgb(255, 205, 86)',
+                        'rgb(75, 192, 192)',
+                        'rgb(54, 162, 235)',
+                        'rgb(153, 102, 255)',
+                        'rgb(201, 203, 207)'
+                    ],
+                    borderWidth: 1
+                }]
+            }
+        });
+    </script>
+    {% endblock script %}
 
-        const config = {
-            type: 'bubble',
-            data: data,
-            options: {}
-        };
-
-        new Chart(ctx, config);
-      </script>
 </body>
 </html>

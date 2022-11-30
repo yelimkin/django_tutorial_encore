@@ -10,12 +10,16 @@
 </head>
 
 <body>
+    {%extends 'partials/base.html'%}
+    {% load crispy_forms_tags %}
+    {% block content %}
     <form action="" method="post">
         <table>
-            {{ form }} {% csrf_token %}
+            {{ form | crispy}} {% csrf_token %}
         </table>
         <button type="submit">확인</button>
     </form>
+    {% endblock content %}
 </body>
 
 </html>

@@ -9,6 +9,8 @@
 </head>
 
 <body>
+    {% extends 'partials/base.html' %}
+    {% block content %}
     <table>
         <tr>
             <td>no</td>
@@ -31,6 +33,7 @@
             <td>{{ article_detail.email }}</td>
         </tr>
     </table>
+    {% endblock content %}
 </body>
 
 </html>

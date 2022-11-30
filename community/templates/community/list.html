@@ -7,6 +7,8 @@
     <title>Document</title>
 </head>
 <body>
+    {% extends 'partials/base.html' %}
+    {% block content %}
     <p>이름 | 제목 | 작성 날짜</p>
         <ul>
             {% for article in article_list%}
@@ -14,5 +16,6 @@
             {% endfor %}
 
         </ul>
+    {% endblock content %}
 </body>
 </html>
