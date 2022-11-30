@@ -11,23 +11,26 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>MEMO</h1>
-    <table class="table table-hover">
-        <tr>
-            <td>이름</td>
-            <td>제목</td>
-            <td>시간</td>
-        </tr>
-        {% for article in latest_article_list%}
-            <tr>
-                <td> {{ article.name }} </td>
-                <td> <a href="/view_detail/{{ article.id }}"> {{ article.title }} </a> </td>
-                <td> {{ article.cdate|date:"Y년 M d일D" }} </td>
-            </tr>
-        {% endfor %}
-    </table>
+  {%extends 'partials/base.html'%}
+  {% block content %}
+  <h1>MEMO</h1>
+  <table class="table table-hover">
+    <tr>
+      <td>이름</td>
+      <td>제목</td>
+      <td>시간</td>
+    </tr>
+    {% for article in latest_article_list%}
+      <tr>
+        <td> {{ article.name }} </td>
+        <td> <a href="community/view_detail/{{ article.id }}"> {{ article.title }} </a> </td>
+        <td> {{ article.cdate|date:"Y년 M d일D" }} </td>
+      </tr>
+    {% endfor %}
+  </table>
 
-    <button type="button" class="btn btn-outline-info" onclick="location.href='http://127.0.0.1:8000/write/'">메모하기</button>
+  <button type="button" class="btn btn-outline-info" onclick="location.href='http://127.0.0.1:8000/community/write/'">메모하기</button>
+    
     <div class="container">
         <div class="accordion" id="accordionExample">
             <div class="accordion-item">
@@ -68,5 +71,6 @@
             </div>
           </div>
     </div>
+    {% endblock content %}
 </body>
 </html>

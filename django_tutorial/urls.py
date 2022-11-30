@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from community.views import write
-from community.views import articleList
-from community.views import viewDetail
+# from community.views import write
+# from community.views import articleList
+# from community.views import viewDetail
 from community.views import index
 
 urlpatterns = [
@@ -26,5 +26,6 @@ urlpatterns = [
     # path('list/', articleList, name="list"),
     # path('view_detail/<int:num>', viewDetail, name="view_detail"),
     path('', index, name="index"),
-    path('community/', include('community.urls')),
+    path('community/', include('community.urls')), # community 하위의 파일 include
+    path('dashboard/', include('dashboard.urls')),
 ]
