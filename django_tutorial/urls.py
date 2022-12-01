@@ -34,7 +34,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
 
     # login 인증 path
-    # path('accounts/register/', UserCreateView.as_view(), name='register'),
+    path('accounts/register/', UserCreateView.as_view(), name='register'),
     # 가입 완료 된 메시지
-    # path('accounts/register/done/', UserCreateDoneTV.as_view(), name='register_done'),
+    path('accounts/register/done/', UserCreateDoneTV.as_view(), name='register_done'),
 ]
