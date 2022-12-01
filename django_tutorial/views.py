@@ -12,4 +12,4 @@ class UserCreateView(CreateView):
     # URL 패턴 전달 인자, urls.py 모듈이 메모리에 로딩된 후에 실행
 
 class UserCreateDoneTV(TemplateView): # 성공하고 나면 보일 파일
-    template_name = 'registration/regiter_done.html'
+    template_name = 'registration/register_done.html'
