@@ -9,5 +9,5 @@ let footer_h = document.querySelector('footer').clientHeight;
 
 doc_h = nav_h + con_h + footer_h;
 if(doc_h >= window.innerHeight){
-    document.querySelector('footer').classList.remove('fixed_bottom')
+    document.querySelector('footer').classList.remove('fixed-bottom');
 }
