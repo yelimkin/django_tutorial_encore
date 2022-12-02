@@ -15,5 +15,5 @@ class ArticleAdmin(admin.ModelAdmin):
     list_display = ('title', 'url', 'cdate')
     list_filter = ['cdate']
     search_fields = ['title', 'contents']
-
+# aamin.ModelAdmin을 상속 받았기 때문에 fieldsets, list_display, list_filter, search_fields를 사용할 수 있따.
 admin.site.register(models.Article, ArticleAdmin)
