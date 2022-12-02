@@ -5,6 +5,7 @@ from community import models
 from .models import Article
 
 # admin 페이지에 Article 데이터 모델 등록
+# 디자인 수정
 class ArticleAdmin(admin.ModelAdmin):
     fieldsets = [
         ('제목', {'fields': ['title']}),
