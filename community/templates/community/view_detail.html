@@ -1,39 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-    {% extends 'partials/base.html' %}
-    {% block content %}
-    <table>
-        <tr>
-            <td>no</td>
-            <td>{{ object.pk }}</td> <!-- 클래스형 뷰이므로 함수에서 선언한 데이터가 아닌 object -->
-        </tr>
-        <tr>
-            <td>제목</td>
-            <td>{{ object.title }}</td>
-        </tr>
-        <tr>
-            <td>저자</td>
-            <td>{{ object.name }}</td>
-        </tr>
-        <tr>
-            <td>내용</td>
-            <td>{{ object.contents }}</td>
-        </tr>
-        <tr>
-            <td>Email</td>
-            <td>{{ object.email }}</td>
-        </tr>
-    </table>
-    {% endblock content %}
-</body>
-
-</html>
+{% extends 'partials/base.html' %}
+{% block title %}
+    {{object.pk}}번글 세부내용
+{% endblock %}
+{% block content %}
+    <div>
+        <table>
+            <tr>
+                <td>no</td>
+                <td>{{ object.pk }}</td> <!-- 클래스형 뷰이므로 함수에서 선언한 데이터가 아닌 object -->
+            </tr>
+            <tr>
+                <td>제목</td>
+                <td>{{ object.title }}</td>
+            </tr>
+            <tr>
+                <td>저자</td>
+                <td>{{ object.name }}</td>
+            </tr>
+            <tr>
+                <td>내용</td>
+                <td>{{ object.contents }}</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>{{ object.email }}</td>
+            </tr>
+        </table>
+        <button><a href="{% url 'community:update' object.id %}">수정</a></button>
+        <button><a href="{% url 'community:delete' object.id %}">삭제</a></button>
+    </div>
+{% endblock content %}

@@ -1,21 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    {% extends 'partials/base.html' %}
-    {% block content %}
-    <p>이름 | 제목 | 작성 날짜</p>
-        <ul>
-            {% for article in article_list%}
-                <li> {{ article.name }} | <a href="community/view_detail/{{ article.id }}"> {{ article.title }} </a> | {{ article.cdate|date:"Y년 M d일 D" }}</li>
-            {% endfor %}
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block title %}글 작성 목록{% endblock %}
 
-        </ul>
-    {% endblock content %}
-</body>
-</html>
+{% block content %}
+    <div>
+        <p>
+            <table>
+                <tr>
+                    <th>제목</th>
+                    <th>이름</th>
+                    <th>작성 날짜</th>
+                </tr>
+                {% for article in article_list%}
+                <tr>
+                    <td><a href="{% url 'community:view_detail' article.id %}">{{article.title}}</a></td>
+                    <td>{{ article.name }}</td>
+                    <td>{{ article.cdate|date:"Y년 M d일 D"}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </p>
+    </div>
+    <p><a href="{% url 'community:change_list' %}">변경 가능 리스트</a>&nbsp;&nbsp;<a href="{% url 'community:write' %}">메모글 작성</a></p>
+{% endblock content %}

@@ -1,25 +1,14 @@
-<!DOCTYPE html>
+{% extends 'partials/base.html' %}
+{% block title %} 글 작성 - {{ user }} {% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <h1>메모글 작성</h1>
+    <p>by {{ user }}</p>
 
-<html>
-
-<head>
-
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Complatable">
-
-</head>
-
-<body>
-    {%extends 'partials/base.html'%}
-    {% load crispy_forms_tags %}
-    {% block content %}
     <form action="" method="post">
         <table>
             {{ form | crispy}} {% csrf_token %}
         </table>
-        <button type="submit">확인</button>
+        <button type="submit" class="btn btn-success btn-block">확인</button>
     </form>
-    {% endblock content %}
-</body>
-
-</html>
+{% endblock content %}

@@ -2,7 +2,9 @@ from django.shortcuts import render
 from .forms import Form
 from .models import Article
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, DetailView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django_tutorial.views import OwnerOnlyMixin
 
 # Create your views here.
 # def write(request):
@@ -28,7 +30,7 @@ from django.views.generic import CreateView, ListView, DetailView
 #     article_detail = Article.objects.get(id=num) # 하나 가져오기
 #     return render(request, 'community/view_detail.html', {'article_detail':article_detail})
 
-class WriteFormView(CreateView):
+class WriteFormView(LoginRequiredMixin, CreateView):
     model = Article
     fields = ['name', 'title', 'contents', 'url', 'email']
     template_name = 'community/write.html'
@@ -39,6 +41,7 @@ class WriteFormView(CreateView):
     # 유효한 폼 데이터가 POST 요청되었을 때, form_valid가 호출된다.
     # form_valid는 단순히 success_url로의 연결을 수행 
     def form_valid(self, form):
+        form.instance.owner = self.request.user # 요청한 소유자를 owner로 저장해준다.
         return super().form_valid(form)
 
 class ArticleListView(ListView):
@@ -48,6 +51,22 @@ class ArticleListView(ListView):
 class ArticleDetailView(DetailView):
     model = Article
     template_name = 'community/view_detail.html'
+
+class ArticleChangeView(LoginRequiredMixin, ListView):
+    template_name = 'community/change_list.html'
+    def get_queryset(self):
+        return Article.objects.filter(owner=self.request.user)
+
+class ArticleUpdateView(OwnerOnlyMixin, UpdateView):
+    model = Article
+    template_name = 'community/article_update.html'
+    fields = ['name', 'title', 'contents', 'url', 'email']
+    success_url = reverse_lazy('community:change_list')
+
+class ArticleDeleteView(OwnerOnlyMixin, DeleteView):
+    model = Article
+    template_name = 'community/article_delete.html'
+    success_url = reverse_lazy('community:change_list')
 
 def index(request):
     latest_article_list = Article.objects.all().order_by('-cdate')[:3] # 내림차순으로 3개 정렬하기 
