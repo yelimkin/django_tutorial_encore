@@ -1,7 +1,12 @@
 from django.contrib import admin
-from .models import CountryData
+from dashboard import models
 
 # Register your models here.
-list_display = ('country', 'population')
+class ArticleAdmin(admin.ModelAdmin):
+    fieldsets = [
+        ('국가', {'fields': ['country']}),
+        ('인구', {'fields': ['population']}),
+    ]
+    list_display = ('country', 'population')
 
-admin.site.register(CountryData)
+admin.site.register(models.CountryData, ArticleAdmin)
