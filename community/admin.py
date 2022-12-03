@@ -18,3 +18,4 @@ class ArticleAdmin(admin.ModelAdmin):
     search_fields = ['title', 'contents']
 # aamin.ModelAdmin을 상속 받았기 때문에 fieldsets, list_display, list_filter, search_fields를 사용할 수 있따.
 admin.site.register(models.Article, ArticleAdmin)
+# 왜 origin이 안 뜨는 것인가.....
